@@ -9,5 +9,6 @@ This repository provides the code and resources for our bird sound classifier, w
 
 This classifier is tailored for ecological studies and supports bird monitoring in remote subtropical montane ecosystems. For detailed information, please refer to our publication in Ecological Information.
 
-Reference
+## **Reference**
+
 Wei, Y.C., Chen, W.L., Tuanmu, M.L., Lu, S.S., Shiao, M.T., 2025. Advanced montane bird monitoring using self-supervised learning and transformer on passive acoustic data. Ecological Information （under review).

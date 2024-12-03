@@ -1,0 +1,10 @@
+# Model Files
+
+The pre-trained and fine-tuned model files are too large to be stored directly in this repository. You can download them from the following Google Drive links:
+
+1. **Pre-trained Model File 1 (1.6 GB)**: [Download Link](https://drive.google.com/file/d/13e2i4smPk6wttyP41EFKv0qMb4gwZSnD/view?usp=sharing)  
+2. **Fine-tuned Model File 2 (1 GB)**: [Download Link](https://drive.google.com/file/d/1rmofMFgQfPcGUlOWdbTRXmDr5FUixc3V/view?usp=sharing)  
+
+### Instructions
+1. Click on the links above to download the `.pth` files.
+2. Place the downloaded files in the appropriate directory in your local project. 

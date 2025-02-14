@@ -1,33 +1,43 @@
 # **Bird Sound Classifier Using Self-Supervised Learning**
 
-This repository contains the code and resources for our bird sound classifier, which utilizes self-supervised learning for pretraining on extensive unlabeled soundscape recordings collected from 22 monitoring stations in subtropical montane forests of Taiwan. The model is subsequently fine-tuned to identify 31 bird species native to Taiwan's montane regions. 
+This repository provides the code and resources for our **self-supervised bird sound classifier**, developed for identifying 31 bird species in Taiwan’s subtropical montane forests. The model is pretrained on **large-scale unlabeled soundscape recordings** collected from 22 monitoring stations and fine-tuned to enhance its classification performance.
 
-## **Key Features**
-1. **Focused on dawn chorus bird song recognition**  
-   The model is designed to classify bird songs during the dawn chorus from soundscape recordings. We trained the model using recordings from this specific period and validated its effectiveness through practical inference tests.  
-
-2. **Addressing data imbalances and cross-domain challenges**  
-   By incorporating a small portion of open-source datasets and employing augmentation techniques, the model effectively handles data imbalance and domain variation issues.  
-
-3. **Enhanced robustness with a 'NOTA' category**  
-   To improve adaptability in open-set recognition tasks, a "None of the Above" (NOTA) category is introduced, enabling the model to better handle non-target sounds and background noise.  
-
-This classifier is tailored for ecological studies and supports bird monitoring in remote subtropical montane ecosystems. For detailed information, please refer to our publication in Ecological Information.
+Our work is based on the **AudioMAE framework** ([GitHub](https://github.com/facebookresearch/AudioMAE)). We have specifically adapted it for bird sound classification, integrating domain-specific enhancements to address **data imbalances**, **cross-domain variability**, and **open-set recognition**.
 
 ---
-## **MODEL ARCHITECTURE**
-The classifier uses a transformer-based architecture with a self-supervised pretraining strategy. Below is the architecture diagram:
+
+## **Key Features**
+### 1. **Specialized for Dawn Chorus Bird Song Recognition**
+The model is designed to classify **dawn chorus** bird vocalizations in soundscape recordings. It has been trained using recordings from this critical time window and validated through real-world inference tests.
+
+### 2. **Handling Data Imbalance & Cross-Domain Challenges**
+By integrating a **small portion of open-source datasets** and applying **data augmentation techniques**, the model improves recognition across different recording conditions while mitigating **class imbalance**.
+
+### 3. **Robust Open-Set Recognition with "NOTA"**
+A **"None of the Above" (NOTA)** category is introduced to help the model distinguish **non-target sounds** (e.g., environmental noise) from actual bird vocalizations, enhancing its generalization ability.
+
+This classifier is designed for **ecological studies** and supports **long-term bird monitoring** in remote montane ecosystems.
+
+
+---
+
+## **Model Architecture**
+Our classifier is built on a **transformer-based architecture**, incorporating **self-supervised pretraining** followed by fine-tuning. Below is the model architecture diagram:
 
 <div style="text-align: left;">
   <img src="./architecture_diagram.png" alt="MODEL ARCHITECTURE" width="600">
 </div>
 
+---
+
 ## **Pipeline**
 ### **Overview of the Model**
 The model pipeline consists of:
-1. **Pretraining** on large-scale unlabeled soundscape data using a self-supervised learning approach.
-2. **Fine-tuning** on a small, labeled dataset of 31 bird species found in Taiwan's montane forests.
+1. **Pretraining** on large-scale, unlabeled soundscape data using self-supervised learning.
+2. **Fine-tuning** on a labeled dataset of **31 bird species** from Taiwan’s montane forests.
 3. **Inference** on soundscape recordings, focusing on dawn chorus bird songs.
+
+---
 
 ## **FINE-TUNED BIRD SPECIES**
 Below is the list of 31 bird species included in the fine-tuning process:
@@ -72,5 +82,62 @@ The following pre-trained and fine-tuned model checkpoints are available for dow
 | Pre-trained (SSL)    | Soundscapes           | N/A                        | [Download](https://drive.google.com/file/d/13e2i4smPk6wttyP41EFKv0qMb4gwZSnD/view?usp=sharing) |
 | Fine-tuned           | Taiwan Montane Birds  | 85.6%                      | [Download](https://drive.google.com/file/d/1rmofMFgQfPcGUlOWdbTRXmDr5FUixc3V/view?usp=sharing) |
 
-## **Citation**
-Wei, Y.C., Chen, W.L., Tuanmu, M.L., Lu, S.S., Shiao, M.T., 2025. Advanced montane bird monitoring using self-supervised learning and transformer on passive acoustic data. Ecological Information.https://doi.org/10.1016/j.ecoinf.2024.102927.
+---
+
+## **Setting Up the Repository**
+To set up the repository and run the model, follow these steps.
+
+### **1. Prerequisites**
+- **Operating System**: Linux (Recommended)
+- **Python Version**: Python 3.9
+- **Conda**: Anaconda or Miniconda installed
+
+### **2. Conda Environment Setup**
+We use a **prepackaged Conda environment** based on [AudioMAE](https://github.com/facebookresearch/AudioMAE). Download the environment archive and set it up as follows:
+
+```bash
+#!/bin/bash
+
+# Extract Conda environment
+mkdir -p ~/Downloads/mae && tar -xzvf ~/Downloads/mae.tar.gz -C ~/Downloads/mae
+
+# Detect Conda installation
+command -v conda &> /dev/null || { echo "Error: Conda not found. Install it first."; exit 1; }
+
+CONDA_BASE=$(conda info --base)
+CONDA_ENV_DIR="$CONDA_BASE/envs"
+
+# Check if the 'mae' environment already exists
+if conda env list | grep -q "mae"; then
+    echo "Error: 'mae' environment already exists. Remove it or use a different name."
+    exit 1
+fi
+
+# Move extracted environment and register it
+mv ~/Downloads/mae "$CONDA_ENV_DIR/"
+conda env list | grep -q "mae" || conda env update -n mae --file "$CONDA_ENV_DIR/mae/environment.yml" --prune
+
+# Activate environment
+echo "Activating 'mae'..."
+source "$CONDA_BASE/bin/activate" mae
+```
+
+### **3. Running the Model**  
+Once the environment is set up, you can proceed with **inference** or **fine-tuning**.
+
+---
+
+## **Reference**  
+- **AudioMAE Repository**: [GitHub](https://github.com/facebookresearch/AudioMAE)  
+- **Original Paper**:  
+  > **P.Y. Huang, H. Xu, J. Li, A. Baevski, M. Auli, W. Galuba, F. Metze, C. Feichtenhofer**  
+  > *Masked Autoencoders That Listen*. arXiv (2022), [10.48550/arXiv.2207.06405](https://arxiv.org/abs/2207.06405)  
+
+---
+
+## **Citation**  
+Please cite:
+
+> **Wei, Y.C., Chen, W.L., Tuanmu, M.L., Lu, S.S., Shiao, M.T.**  
+> *Advanced montane bird monitoring using self-supervised learning and transformer on passive acoustic data.*  
+> **Ecological Information (2024).**  [DOI](https://doi.org/10.1016/j.ecoinf.2024.102927)

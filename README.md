@@ -92,8 +92,15 @@ To set up the repository and run the model, follow these steps.
 - **Python Version**: Python 3.9
 - **Conda**: Anaconda or Miniconda installed
 
-### **2. Conda Environment Setup**
-We use a **prepackaged Conda environment** based on [AudioMAE](https://github.com/facebookresearch/AudioMAE). Download the environment archive and set it up as follows:
+## **2. Conda Environment Setup**
+We use a **prepackaged Conda environment** based on [AudioMAE](https://github.com/facebookresearch/AudioMAE).  
+
+### **Download the Prepackaged Environment**
+- Download the Conda-packed environment provided by **AudioMAE** from [this link](https://drive.google.com/file/d/1ECVmVyscVqmhI7OQa0nghIsWVaZhZx3q/view?usp=sharing).  
+- Save the file in your **Downloads** directory (`~/Downloads/`).  
+
+### **Extract and Set Up the Environment**
+Run the following commands to extract the archive and move it to your Conda environment directory automatically:
 
 ```bash
 #!/bin/bash
